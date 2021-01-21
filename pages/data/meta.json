@@ -5,10 +5,15 @@
     "description": "ディスクリプション",
     "pageUrl": "",
     "domain": "localhost:8080",
-    "ogpImage": "ogp画像"
+    "ogpImage": ""
   },
   "top": {
     "title": "ページタイトル",
+    "siteName": ""
+  },
+  "about": {
+    "title": "ページタイトル",
+    "pageUrl": "about",
     "siteName": ""
   }
 }

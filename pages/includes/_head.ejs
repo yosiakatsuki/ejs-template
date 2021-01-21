@@ -1,4 +1,4 @@
-<%- include('./_const'); -%>
+<%- include('./_function'); -%>
 <%
 const _default = meta[ 'default' ];
 for ( let key in _default ) {
@@ -8,13 +8,8 @@ for ( let key in _default ) {
 }
 page[ 'sitename' ] = page[ 'sitename' ] ? '| ' + page[ 'sitename' ] : '';
 const siteTitle = page[ 'title' ] + page[ 'sitename' ];
-let url = '';
-if ( page[ 'domain' ] ) {
-    url = page[ 'domain' ];
-}
-if ( url && page[ 'pageUrl' ] ) {
-    url += '/' + page[ 'pageUrl' ];
-}
+const pageUrl = getUrl( page[ 'pageUrl' ] );
+const ogpImage = getAssetUrl( page[ 'ogpImage' ] );
 -%>
 <head>
     <meta charset="UTF-8">
@@ -25,17 +20,17 @@ if ( url && page[ 'pageUrl' ] ) {
     <% if(page[ 'description' ]) { -%>
         <meta name="description" content="<%= page[ 'description' ] %>"/>
     <% } -%>
-    <% if(url) { -%>
-        <link rel="canonical" href="<%= url %>">
+    <% if(pageUrl) { -%>
+        <link rel="canonical" href="<%= pageUrl %>">
     <% } -%>
+    <% if(pageUrl) { -%>
+        <meta property="og:url" content="<%= pageUrl %>">
+    <% } %>
     <meta property="og:title" content="<%= siteTitle %>">
     <meta property="og:description" content="<%= page[ 'description' ] %>">
-    <% if(page[ 'ogpImage' ]) { -%>
-        <meta property="og:image" content="<%= page[ 'ogpImage' ] %>">
+    <% if(ogpImage) { -%>
+        <meta property="og:image" content="<%= ogpImage %>">
     <% } -%>
-    <% if(url) { -%>
-        <meta property="og:url" content="<%= url %>">
-    <% } %>
-    <link rel="stylesheet" href="<%= page[ 'domain' ] %>/css/style.css">
-    <script defer src="<%= page[ 'domain' ] %>/js/app.js"></script>
+    <link rel="stylesheet" href="<%= getScriptsUrl( 'css/style.css' ) %>">
+    <script defer src="<%= getScriptsUrl( 'js/app.js' ) %>"></script>
 </head>

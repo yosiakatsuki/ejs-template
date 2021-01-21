@@ -44,22 +44,28 @@ const buildEjs = () => {
 		.pipe( dest( './dest' ) );
 };
 
+const copyAssets = () => {
+	return src( [ './pages/assets/**/*.*' ] )
+		.pipe( dest( './dest/assets' ) )
+};
+
 const buildAll = ( cb = undefined ) => {
 	sass();
 	buildJs();
 	buildEjs();
+	copyAssets();
 	if ( cb ) {
 		cb();
 	}
 };
 
 const watchFiles = () => {
-	buildAll();
 	watch( [ './src/sass/**/*.scss', './blocks/**/*.scss' ], sass );
-	watch( [ './src/js/app/*.js' ], buildJs );
+	watch( [ './src/js/*.js' ], buildJs );
 	watch( [ './pages/**/*.ejs', './pages/**/*.json' ], buildEjs );
+	watch( [ './pages/assets/**/*.*' ], copyAssets );
 };
 
-exports.watch = series( watchFiles );
-exports.build = buildAll;
-exports.default = series( watchFiles );
+exports.watch = series( buildAll, watchFiles );
+exports.build = series( buildAll );
+exports.default = series( buildAll, watchFiles );
