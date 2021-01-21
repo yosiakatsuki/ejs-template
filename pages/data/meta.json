@@ -1,0 +1,14 @@
+{
+  "default": {
+    "title": "ページタイトル",
+    "siteName": "サイト名",
+    "description": "ディスクリプション",
+    "pageUrl": "",
+    "domain": "localhost:8080",
+    "ogpImage": "ogp画像"
+  },
+  "top": {
+    "title": "ページタイトル",
+    "siteName": ""
+  }
+}

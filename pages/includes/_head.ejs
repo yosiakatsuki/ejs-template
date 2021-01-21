@@ -1,0 +1,41 @@
+<%- include('./_const'); -%>
+<%
+const _default = meta[ 'default' ];
+for ( let key in _default ) {
+    if ( typeof page[ key ] === 'undefined' ) {
+        page[ key ] = _default[ key ];
+    }
+}
+page[ 'sitename' ] = page[ 'sitename' ] ? '| ' + page[ 'sitename' ] : '';
+const siteTitle = page[ 'title' ] + page[ 'sitename' ];
+let url = '';
+if ( page[ 'domain' ] ) {
+    url = page[ 'domain' ];
+}
+if ( url && page[ 'pageUrl' ] ) {
+    url += '/' + page[ 'pageUrl' ];
+}
+-%>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title><%= siteTitle %></title>
+    <% if(page[ 'description' ]) { -%>
+        <meta name="description" content="<%= page[ 'description' ] %>"/>
+    <% } -%>
+    <% if(url) { -%>
+        <link rel="canonical" href="<%= url %>">
+    <% } -%>
+    <meta property="og:title" content="<%= siteTitle %>">
+    <meta property="og:description" content="<%= page[ 'description' ] %>">
+    <% if(page[ 'ogpImage' ]) { -%>
+        <meta property="og:image" content="<%= page[ 'ogpImage' ] %>">
+    <% } -%>
+    <% if(url) { -%>
+        <meta property="og:url" content="<%= url %>">
+    <% } %>
+    <link rel="stylesheet" href="<%= page[ 'domain' ] %>/css/style.css">
+    <script defer src="<%= page[ 'domain' ] %>/js/app.js"></script>
+</head>
