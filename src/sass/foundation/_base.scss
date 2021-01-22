@@ -1,0 +1,21 @@
+@use "../../../node_modules/normalize.css/normalize.css";
+@use "../global/global";
+
+* {
+  box-sizing: border-box;
+
+  &::before,
+  &::after {
+    box-sizing: border-box;
+  }
+}
+
+html {
+  -ms-text-size-adjust: 100%;
+}
+
+body {
+  font-family: global.$font_family;
+  color: global.$color_text;
+  font-size: global.$font_size;
+}

@@ -1,0 +1,26 @@
+/**
+ * 色
+ */
+$color_text: #555555;
+$color_main: #3498d4;
+
+/**
+ * フォント
+ */
+$font_family: "Helvetica neue", "Segoe UI", "Meiryo", "Hiragino Sans", "Hiragino Kaku Gothic ProN", sans-serif;
+$font_size: 16px;
+
+/**
+ * コンテナ
+ */
+$container_size: 1200px;
+$gutter: 1rem;
+
+/**
+ * ブレークポイント
+ */
+$breakpoints: (
+        mobile : 600px,
+        tablet : 768px,
+        desktop : 1026px,
+);

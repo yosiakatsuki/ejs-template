@@ -1,0 +1,10 @@
+@use "../global/global";
+
+.container {
+  display: block;
+  max-width: calc(#{global.$container_size} + #{global.$gutter * 2});
+  padding-right: global.$gutter;
+  padding-left: global.$gutter;
+  margin-right: auto;
+  margin-left: auto;
+}
