@@ -8,6 +8,7 @@ const babel = require( 'gulp-babel' );
 const ejs = require( 'gulp-ejs' );
 const rename = require( 'gulp-rename' );
 const fs = require( 'fs' );
+const browserSync = require( 'browser-sync' ).create();
 
 const postcssPlugins = [
 	autoprefixer( {
@@ -59,13 +60,31 @@ const buildAll = ( cb = undefined ) => {
 	}
 };
 
+const initBrowserSync = ( done ) => {
+	browserSync.init( {
+		server: {
+			baseDir: 'dest',
+			index: 'index.html'
+		},
+		port: 8080
+	} );
+	done();
+};
+
+const reloadBrowserSync = ( done ) => {
+	browserSync.reload();
+	done();
+};
+
+
 const watchFiles = () => {
 	watch( [ './src/sass/**/*.scss', './blocks/**/*.scss' ], sass );
 	watch( [ './src/js/*.js' ], buildJs );
 	watch( [ './pages/**/*.ejs', './pages/**/*.json' ], buildEjs );
 	watch( [ './pages/assets/**/*.*' ], copyAssets );
+	watch( [ './dest/**/*.*' ], reloadBrowserSync );
 };
 
-exports.watch = series( buildAll, watchFiles );
+exports.watch = series( buildAll, initBrowserSync, watchFiles );
 exports.build = series( buildAll );
-exports.default = series( buildAll, watchFiles );
+exports.default = exports.watch;
