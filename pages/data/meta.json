@@ -4,7 +4,7 @@
     "siteName": "サイト名",
     "description": "ディスクリプション",
     "pageUrl": "",
-    "domain": "localhost:8080",
+    "root": "/",
     "ogpImage": ""
   },
   "top": {

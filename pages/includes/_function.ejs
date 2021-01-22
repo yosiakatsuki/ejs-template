@@ -1,10 +1,11 @@
 <%
 // サイトのルートを定数化.
-ROOT = meta[ 'default' ].domain;
+ROOT = meta[ 'default' ].root;
 // サイト内URLの作成.
 getUrl = ( path ) => {
     path = path ? `/${ path }` : '';
-    return `${ ROOT }${ path }`;
+    path = `${ ROOT.replace( /\/$/, '' ) }${ path }`;
+    return path ? path : ROOT;
 }
 // JS,CSS,アセットに付け加える日付クエリ.
 addDateQuery = ( url ) => {
@@ -24,7 +25,7 @@ getScriptsUrl = ( path ) => {
     return addDateQuery( getUrl( path ) );
 }
 // アセットフォルダURL.
-ASSETS = `${ meta[ 'default' ].domain }/assets`;
+ASSETS = `${ ROOT.replace( /\/$/, '' ) }/assets`;
 // アセット内のファイルURL作成.
 getAssetUrl = ( path ) => {
     if ( ! path ) {
